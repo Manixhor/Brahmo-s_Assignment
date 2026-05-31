@@ -1,0 +1,496 @@
+{
+  "organization": {
+    "id": "ORG-001",
+    "name": "Supra Hospital"
+  },
+  "user": {
+    "id": "U-001",
+    "name": "Dr. Vikram",
+    "role": "Orthopaedics HOD",
+    "department": "Orthopaedics"
+  },
+  "patient": {
+    "id": "P-001",
+    "name": "Mr. Rajan",
+    "age": 67,
+    "conditions": ["Post-op pain", "Atrial fibrillation", "Mild renal risk"]
+  },
+  "candidate_nodes": [
+    {
+      "id": "N-G01",
+      "title": "Warfarin and NSAID interaction ban",
+      "node_type": "CONSTRAINT",
+      "zone": 2,
+      "distance": 4,
+      "retrieval_weight": 0.97,
+      "injection_weight": 0.94,
+      "recency_rank": 8,
+      "review_required": false,
+      "tags": ["medication", "safety"],
+      "content": {
+        "full": "Never combine warfarin therapy with NSAID pain plans for this patient profile. Escalate to the consultant before changing anticoagulation-sensitive medication, document rationale, and prefer safer analgesic alternatives aligned to renal and bleeding risk.",
+        "compressed": "Warfarin plus NSAIDs is prohibited. Use safer analgesic alternatives and document consultant approval for exceptions.",
+        "constraint_only": "Do not combine warfarin and NSAIDs."
+      }
+    },
+    {
+      "id": "N-G02",
+      "title": "Renal-risk analgesic ladder",
+      "node_type": "CONSTRAINT",
+      "zone": 2,
+      "distance": 3,
+      "retrieval_weight": 0.94,
+      "injection_weight": 0.91,
+      "recency_rank": 7,
+      "review_required": false,
+      "tags": ["analgesia", "renal"],
+      "content": {
+        "full": "For patients with elevated renal risk, start with acetaminophen-compatible pain control, avoid nephrotoxic combinations, and request renal review before any escalation to higher-risk agents. Preserve hydration notes and monitor creatinine trend before adjustment.",
+        "compressed": "Use renal-safe analgesia first and avoid nephrotoxic combinations without renal review.",
+        "constraint_only": "Use renal-safe analgesia only."
+      }
+    },
+    {
+      "id": "N-G03",
+      "title": "High-risk sedation sign-off",
+      "node_type": "CONSTRAINT",
+      "zone": 2,
+      "distance": 2,
+      "retrieval_weight": 0.91,
+      "injection_weight": 0.88,
+      "recency_rank": 6,
+      "review_required": false,
+      "tags": ["sedation"],
+      "content": {
+        "full": "Any deep-sedation recommendation for a high-risk orthopaedic patient needs anaesthesia sign-off, last-dose timing review, and nurse handoff instructions captured before administration.",
+        "compressed": "Deep sedation requires anaesthesia sign-off and handoff documentation.",
+        "constraint_only": "Deep sedation needs anaesthesia sign-off."
+      }
+    },
+    {
+      "id": "N-G04",
+      "title": "Post-op red-flag escalation window",
+      "node_type": "CONSTRAINT",
+      "zone": 2,
+      "distance": 2,
+      "retrieval_weight": 0.89,
+      "injection_weight": 0.86,
+      "recency_rank": 5,
+      "review_required": false,
+      "tags": ["escalation"],
+      "content": {
+        "full": "Escalate immediately for disproportionate pain, swelling, shortness of breath, or altered mental status within the first 72 post-operative hours. The model should not downplay these signs or delay review recommendations.",
+        "compressed": "Red-flag post-op symptoms demand immediate escalation within 72 hours.",
+        "constraint_only": "Immediate escalation for post-op red flags."
+      }
+    },
+    {
+      "id": "N-G05",
+      "title": "Medication reconciliation at handover",
+      "node_type": "CONSTRAINT",
+      "zone": 2,
+      "distance": 1,
+      "retrieval_weight": 0.9,
+      "injection_weight": 0.84,
+      "recency_rank": 4,
+      "review_required": false,
+      "tags": ["handover"],
+      "content": {
+        "full": "All analgesic changes must be reflected in the handover summary with current anticoagulation status, next review time, and the name of the responsible consultant or resident.",
+        "compressed": "Handover must include analgesic changes, anticoagulation status, and owner.",
+        "constraint_only": "Update handover for medication changes."
+      }
+    },
+    {
+      "id": "N-G06",
+      "title": "DVT prophylaxis continuation",
+      "node_type": "CONSTRAINT",
+      "zone": 2,
+      "distance": 1,
+      "retrieval_weight": 0.92,
+      "injection_weight": 0.89,
+      "recency_rank": 3,
+      "review_required": false,
+      "tags": ["dvt"],
+      "content": {
+        "full": "Do not suspend DVT prophylaxis in routine pain-management planning unless a documented contraindication or consultant-level exception exists. Keep mobility, bleeding, and post-op timing in view.",
+        "compressed": "Continue DVT prophylaxis unless a documented contraindication exists.",
+        "constraint_only": "Do not suspend DVT prophylaxis casually."
+      }
+    },
+    {
+      "id": "N-O01",
+      "title": "Rajan NSAID ban after GI bleed history",
+      "node_type": "CONSTRAINT",
+      "zone": 1,
+      "distance": 0,
+      "retrieval_weight": 0.98,
+      "injection_weight": 0.96,
+      "recency_rank": 2,
+      "review_required": false,
+      "tags": ["patient-specific"],
+      "content": {
+        "full": "Mr. Rajan has a prior GI bleed risk profile and active anticoagulation concerns. Avoid all NSAID recommendations in this session, reference safer alternatives, and flag any conflicting historical note for consultant review.",
+        "compressed": "Avoid all NSAIDs for Rajan because of GI bleed and anticoagulation risk.",
+        "constraint_only": "Rajan must not receive NSAIDs."
+      }
+    },
+    {
+      "id": "N-O02",
+      "title": "Pain review every 4 hours",
+      "node_type": "CONSTRAINT",
+      "zone": 1,
+      "distance": 1,
+      "retrieval_weight": 0.88,
+      "injection_weight": 0.81,
+      "recency_rank": 9,
+      "review_required": false,
+      "tags": ["monitoring"],
+      "content": {
+        "full": "Repeat pain scoring and sedation review every four hours until the regimen stabilizes. Each review should note symptom trend, mobility impact, and whether escalation criteria are approaching.",
+        "compressed": "Review pain and sedation every four hours until stable.",
+        "constraint_only": "Pain review every four hours."
+      }
+    },
+    {
+      "id": "N-O03",
+      "title": "Bowel regimen with opioid use",
+      "node_type": "CONSTRAINT",
+      "zone": 1,
+      "distance": 1,
+      "retrieval_weight": 0.8,
+      "injection_weight": 0.76,
+      "recency_rank": 10,
+      "review_required": false,
+      "tags": ["opioid"],
+      "content": {
+        "full": "If opioid therapy is suggested, include bowel-regimen planning and hydration notes to prevent avoidable constipation-related setbacks during recovery.",
+        "compressed": "Opioid use should include bowel-regimen planning.",
+        "constraint_only": "Pair opioids with bowel regimen."
+      }
+    },
+    {
+      "id": "N-D01",
+      "title": "Consultant approved multimodal plan",
+      "node_type": "DECISION",
+      "zone": 1,
+      "distance": 1,
+      "retrieval_weight": 0.85,
+      "injection_weight": 0.73,
+      "recency_rank": 1,
+      "review_required": false,
+      "tags": ["decision"],
+      "content": {
+        "full": "Yesterday's consultant round approved a multimodal plan anchored on paracetamol, monitored opioid rescue, and mobility-led reassessment instead of NSAID escalation. The decision emphasized minimising bleeding risk while keeping pain control functional for physiotherapy.",
+        "compressed": "Consultant approved multimodal analgesia without NSAID escalation; mobility remains the reassessment trigger.",
+        "constraint_only": "Current plan: multimodal analgesia, no NSAID escalation."
+      }
+    },
+    {
+      "id": "N-D02",
+      "title": "Physiotherapy wants morning mobilisation",
+      "node_type": "DECISION",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.76,
+      "injection_weight": 0.62,
+      "recency_rank": 2,
+      "review_required": false,
+      "tags": ["physio"],
+      "content": {
+        "full": "The physiotherapy team requested that pain control peaks support morning mobilisation. Overnight dosing should avoid excessive sedation and should preserve functional participation in early exercise.",
+        "compressed": "Align overnight dosing so pain control supports morning mobilisation without excess sedation.",
+        "constraint_only": "Support morning mobilisation in dosing plan."
+      }
+    },
+    {
+      "id": "N-D03",
+      "title": "Nursing escalated breakthrough pain pattern",
+      "node_type": "DECISION",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.74,
+      "injection_weight": 0.58,
+      "recency_rank": 3,
+      "review_required": false,
+      "tags": ["nursing"],
+      "content": {
+        "full": "Nursing notes show recurring breakthrough pain during turns and transfers. The team agreed to assess timing and route adjustments before adding new high-risk medications.",
+        "compressed": "Breakthrough pain appears during turns and transfers; optimize timing before adding risky medication.",
+        "constraint_only": "Address breakthrough pain around transfers."
+      }
+    },
+    {
+      "id": "N-D04",
+      "title": "Pharmacy recommended opioid ceiling",
+      "node_type": "DECISION",
+      "zone": 1,
+      "distance": 3,
+      "retrieval_weight": 0.71,
+      "injection_weight": 0.49,
+      "recency_rank": 4,
+      "review_required": false,
+      "tags": ["pharmacy"],
+      "content": {
+        "full": "Pharmacy advised a conservative opioid ceiling due to age, fall risk, and anticoagulation-linked recovery complexity. The team should adjust scheduling before increasing dose volume.",
+        "compressed": "Pharmacy recommends a conservative opioid ceiling and scheduling changes before dose increases.",
+        "constraint_only": "Keep opioid ceiling conservative."
+      }
+    },
+    {
+      "id": "N-D05",
+      "title": "Family requested clearer nighttime plan",
+      "node_type": "DECISION",
+      "zone": 1,
+      "distance": 3,
+      "retrieval_weight": 0.69,
+      "injection_weight": 0.46,
+      "recency_rank": 5,
+      "review_required": false,
+      "tags": ["family"],
+      "content": {
+        "full": "The family asked for a simpler explanation of nighttime pain management so that expectations and escalation pathways are clear during visiting updates.",
+        "compressed": "Family wants a clearer nighttime pain-management explanation.",
+        "constraint_only": "Explain nighttime plan clearly to family."
+      }
+    },
+    {
+      "id": "N-D06",
+      "title": "Ward agreed to senior review if pain worsens",
+      "node_type": "DECISION",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.72,
+      "injection_weight": 0.55,
+      "recency_rank": 6,
+      "review_required": false,
+      "tags": ["review"],
+      "content": {
+        "full": "The ward team agreed that worsening pain after the current regimen adjustment should trigger senior review instead of repeated junior-only medication changes.",
+        "compressed": "Worsening pain after regimen changes should trigger senior review.",
+        "constraint_only": "Escalate worsening pain to senior review."
+      }
+    },
+    {
+      "id": "N-F01",
+      "title": "Total knee replacement on day three",
+      "node_type": "FACT",
+      "zone": 1,
+      "distance": 1,
+      "retrieval_weight": 0.83,
+      "injection_weight": 0.7,
+      "recency_rank": 11,
+      "review_required": false,
+      "tags": ["surgery"],
+      "content": {
+        "full": "Mr. Rajan is on post-operative day three after total knee replacement, making functional pain control, mobility support, and thrombosis prevention more important than aggressive comfort-only measures.",
+        "compressed": "Post-op day three after knee replacement; prioritize mobility-supporting pain control.",
+        "constraint_only": "Post-op day three after TKR."
+      }
+    },
+    {
+      "id": "N-F02",
+      "title": "Atrial fibrillation on anticoagulation",
+      "node_type": "FACT",
+      "zone": 1,
+      "distance": 1,
+      "retrieval_weight": 0.84,
+      "injection_weight": 0.67,
+      "recency_rank": 12,
+      "review_required": false,
+      "tags": ["afib"],
+      "content": {
+        "full": "The patient has atrial fibrillation managed with anticoagulation, increasing the importance of bleeding-safe recommendations and tight medication reconciliation.",
+        "compressed": "Anticoagulation for atrial fibrillation increases bleeding sensitivity.",
+        "constraint_only": "Atrial fibrillation on anticoagulation."
+      }
+    },
+    {
+      "id": "N-F03",
+      "title": "Pain spikes during transfers",
+      "node_type": "FACT",
+      "zone": 1,
+      "distance": 1,
+      "retrieval_weight": 0.79,
+      "injection_weight": 0.6,
+      "recency_rank": 13,
+      "review_required": false,
+      "tags": ["symptom"],
+      "content": {
+        "full": "Pain is acceptable at rest but spikes sharply during transfers and physiotherapy preparation, suggesting timing and support changes may outperform blanket dose increases.",
+        "compressed": "Pain spikes during transfers, so timing changes may help more than dose increases.",
+        "constraint_only": "Pain spikes during transfers."
+      }
+    },
+    {
+      "id": "N-F04",
+      "title": "Mild renal risk on labs",
+      "node_type": "FACT",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.78,
+      "injection_weight": 0.54,
+      "recency_rank": 14,
+      "review_required": false,
+      "tags": ["labs"],
+      "content": {
+        "full": "Recent labs suggest mild renal vulnerability rather than overt failure, but the pattern still argues for caution with nephrotoxic combinations and hydration-sensitive planning.",
+        "compressed": "Mild renal risk supports caution with nephrotoxic analgesic combinations.",
+        "constraint_only": "Labs show mild renal risk."
+      }
+    },
+    {
+      "id": "N-F05",
+      "title": "Sleep disrupted by overnight pain",
+      "node_type": "FACT",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.68,
+      "injection_weight": 0.41,
+      "recency_rank": 15,
+      "review_required": false,
+      "tags": ["sleep"],
+      "content": {
+        "full": "Sleep is repeatedly interrupted by overnight pain, which affects morning recovery and patient confidence, but this is lower priority than the medication-safety profile.",
+        "compressed": "Overnight pain is disrupting sleep and recovery.",
+        "constraint_only": "Overnight pain disrupts sleep."
+      }
+    },
+    {
+      "id": "N-A01",
+      "title": "Avoid generic reassurance without escalation criteria",
+      "node_type": "ANTI_PATTERN",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.7,
+      "injection_weight": 0.52,
+      "recency_rank": 19,
+      "review_required": false,
+      "tags": ["communication"],
+      "content": {
+        "full": "Do not respond with vague reassurance about routine post-operative pain unless the answer also clarifies monitoring thresholds and when to seek senior review.",
+        "compressed": "Avoid vague reassurance without escalation guidance.",
+        "constraint_only": "Do not reassure without escalation criteria."
+      }
+    },
+    {
+      "id": "N-A02",
+      "title": "Avoid recommending NSAIDs by habit",
+      "node_type": "ANTI_PATTERN",
+      "zone": 1,
+      "distance": 1,
+      "retrieval_weight": 0.82,
+      "injection_weight": 0.72,
+      "recency_rank": 20,
+      "review_required": false,
+      "tags": ["safety"],
+      "content": {
+        "full": "Do not fall back to standard NSAID recommendations for orthopaedic pain when patient-specific anticoagulation and GI-bleed risk have already ruled them out.",
+        "compressed": "Avoid habitual NSAID suggestions; patient-specific risk already rules them out.",
+        "constraint_only": "Avoid routine NSAID suggestions."
+      }
+    },
+    {
+      "id": "N-A03",
+      "title": "Avoid ignoring physiotherapy timing",
+      "node_type": "ANTI_PATTERN",
+      "zone": 1,
+      "distance": 3,
+      "retrieval_weight": 0.61,
+      "injection_weight": 0.34,
+      "recency_rank": 21,
+      "review_required": false,
+      "tags": ["physio"],
+      "content": {
+        "full": "Recommendations that ignore physiotherapy timing can make a clinically sound medication plan functionally useless during the most important mobilisation window.",
+        "compressed": "Do not ignore physiotherapy timing when shaping the regimen.",
+        "constraint_only": "Keep physiotherapy timing in view."
+      }
+    },
+    {
+      "id": "N-A04",
+      "title": "Avoid overconfidence on incomplete overnight notes",
+      "node_type": "ANTI_PATTERN",
+      "zone": 1,
+      "distance": 3,
+      "retrieval_weight": 0.56,
+      "injection_weight": 0.29,
+      "recency_rank": 22,
+      "review_required": true,
+      "tags": ["documentation"],
+      "content": {
+        "full": "Overnight notes are partially incomplete. The model should not present certainty about exact pain-control response without acknowledging missing documentation and suggesting review.",
+        "compressed": "Overnight notes are incomplete; avoid overconfident conclusions.",
+        "constraint_only": "Incomplete overnight notes limit certainty."
+      }
+    },
+    {
+      "id": "N-A05",
+      "title": "Avoid sedation-heavy workaround",
+      "node_type": "ANTI_PATTERN",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.67,
+      "injection_weight": 0.44,
+      "recency_rank": 23,
+      "review_required": false,
+      "tags": ["sedation"],
+      "content": {
+        "full": "Do not solve transfer-related pain by defaulting to heavier sedation when the actual need may be better timing, dosing adjustment, or mobility support.",
+        "compressed": "Avoid sedation-heavy workarounds for transfer pain.",
+        "constraint_only": "Do not default to heavy sedation."
+      }
+    },
+    {
+      "id": "N-R01",
+      "title": "Review anticoagulation timing note",
+      "node_type": "FACT",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.73,
+      "injection_weight": 0.48,
+      "recency_rank": 25,
+      "review_required": true,
+      "tags": ["review"],
+      "content": {
+        "full": "The most recent anticoagulation timing entry needs verification against medication administration records before any plan that depends on exact last-dose timing is treated as final.",
+        "compressed": "Verify the latest anticoagulation timing entry before relying on it.",
+        "constraint_only": "Anticoagulation timing note needs verification."
+      }
+    },
+    {
+      "id": "N-F09",
+      "title": "Patient prefers concise explanations",
+      "node_type": "FACT",
+      "zone": 1,
+      "distance": 3,
+      "retrieval_weight": 0.58,
+      "injection_weight": 0.27,
+      "recency_rank": 27,
+      "review_required": false,
+      "tags": ["communication"],
+      "content": {
+        "full": "The patient responds best to concise stepwise explanations. This is useful for bedside communication but less important than treatment safety and planning.",
+        "compressed": "Patient prefers concise explanations.",
+        "constraint_only": "Keep explanations concise."
+      }
+    },
+    {
+      "id": "N-F10",
+      "title": "Previous nausea with one opioid option",
+      "node_type": "FACT",
+      "zone": 1,
+      "distance": 2,
+      "retrieval_weight": 0.66,
+      "injection_weight": 0.43,
+      "recency_rank": 28,
+      "review_required": false,
+      "tags": ["side-effects"],
+      "content": {
+        "full": "The patient previously reported nausea with one opioid option, which may guide route or adjunct choices if breakthrough pain requires rescue medication.",
+        "compressed": "Past nausea with one opioid may guide rescue-medication choice.",
+        "constraint_only": "Past nausea with one opioid option."
+      }
+    }
+  ]
+}

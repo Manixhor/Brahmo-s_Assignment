@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BRAHMO Composition Agent</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">BRAHMO Assessment</p>
+        <h1>BRAHMO Composition Agent</h1>
+        <p class="lede">
+          A hiring-focused frontend concept that explains the composition pipeline, protected constraints,
+          and token budget adaptation in one screen.
+        </p>
+      </section>
+
+      <section class="controls card">
+        <div>
+          <label for="budget">Token budget</label>
+          <input id="budget" type="range" min="2000" max="4000" value="4000" step="100" />
+        </div>
+        <div class="budget-pill">
+          <span>Budget</span>
+          <strong id="budgetValue">4000</strong>
+        </div>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>Budget Composition</h2>
+          <div class="stacked-bar">
+            <span class="bar system" id="systemBar" style="width: 20%">
+              <span class="bar-label">System 800</span>
+            </span>
+            <span class="bar context" id="contextBar" style="width: 71%">
+              <span class="bar-label" id="contextBarLabel">Context 2840</span>
+            </span>
+            <span class="bar user" id="userBar" style="width: 5%">
+              <span class="bar-label">User 200</span>
+            </span>
+          </div>
+          <div class="budget-inline-note" id="userNote">
+            <span class="legend-swatch user"></span>
+            <span class="legend-text" id="userLegend">User reserve 200</span>
+          </div>
+          <p id="budgetNarrative">Total 3840 / 4000. Fits with protected constraints untouched.</p>
+        </article>
+
+        <article class="card">
+          <h2>Compression Behavior</h2>
+          <ul id="compressionList" class="timeline">
+            <li>Pass 1: low-value facts collapse from FULL to CONSTRAINT_ONLY</li>
+            <li>Pass 2: medium-value decisions compress to COMPRESSED</li>
+            <li>Constraints remain FULL regardless of distance</li>
+          </ul>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h2>8-Block Order</h2>
+          <ol class="block-list">
+            <li>Role</li>
+            <li>Global Constraints</li>
+            <li>Recent Decisions</li>
+            <li>Active Constraints</li>
+            <li>Session-Specific Context</li>
+            <li>Open Questions</li>
+            <li>Stale Flags</li>
+            <li>Session Boundaries</li>
+          </ol>
+        </article>
+
+        <article class="card accent">
+          <h2>Interview Signal</h2>
+          <p>
+            The strongest story here is not just that the app trims tokens. It trims them safely,
+            deterministically, and in a way an evaluator can audit.
+          </p>
+        </article>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+  </html>
